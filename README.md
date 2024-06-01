@@ -53,4 +53,4 @@
 Поддержите наш проект, и вместе мы сделаем кыргызскую культуру доступной и увлекательной для миллионов людей по всему миру.
 Спасибо за внимание!
 
-Ссылка на приложение: https://drive.google.com/drive/u/0/folders/1wK9UvxeHkrwA76WqiUXdAkouDWEjeliK
+Ссылка на приложение: https://drive.google.com/drive/u/0/mobile/folders/12NrA7TZBYpclpZddw-yOnEyJCSnsiDYn

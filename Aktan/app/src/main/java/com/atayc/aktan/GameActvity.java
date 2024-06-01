@@ -44,7 +44,6 @@ public class GameActvity extends AppCompatActivity {
 
     };
     private MediaPlayer mediaPlayer;
-    // Array of raw resource IDs for audio files
     private int[] audioResIds = {
             0,
             R.raw.nicetomeetu,
@@ -81,7 +80,6 @@ public class GameActvity extends AppCompatActivity {
 
         background = MediaPlayer.create(this, R.raw.spirit);
 
-        // Set an OnTouchListener on the root view of the layout
         View rootView = findViewById(android.R.id.content);
         rootView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -89,7 +87,6 @@ public class GameActvity extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     if (textIndex < texts.length) {
                         if (texts[textIndex].equals("Сенин атың ким?")) {
-                            // Play the audio for the question
                             at = MediaPlayer.create(GameActvity.this, R.raw.name);
                             if (at != null) {
                                 at.start();
@@ -117,7 +114,7 @@ public class GameActvity extends AppCompatActivity {
                             textIndex++;
                             updateStory();
                         }
-                    }, 0); // 2 second delay
+                    }, 0);
                 } else {
                     Toast.makeText(GameActvity.this, "Сенин атың ким?", Toast.LENGTH_SHORT).show();
                 }
@@ -129,8 +126,6 @@ public class GameActvity extends AppCompatActivity {
         if (textIndex < texts.length) {
             speech.setText(texts[textIndex]);
             Log.d("PlayActivity", "Displaying text: " + texts[textIndex]);
-
-            // Change the image based on the current text index
             switch (textIndex) {
                 case 0:
                     aktan.setImageResource(R.drawable.aktan);
@@ -170,12 +165,10 @@ public class GameActvity extends AppCompatActivity {
                     break;
             }
 
-            // Release any previous media player instance
             if (mediaPlayer != null) {
                 mediaPlayer.release();
             }
 
-            // Play the corresponding audio if available
             if (audioResIds[textIndex] != 0) {
                 mediaPlayer = MediaPlayer.create(GameActvity.this, audioResIds[textIndex]);
                 if (mediaPlayer != null) {

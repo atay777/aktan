@@ -56,11 +56,37 @@
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:text="Ввести"
-      android:textColor="@color/white"
+      android:textColor="@color/black"
       android:visibility="gone"
       android:layout_marginLeft="44dp"
-      android:backgroundTint="@color/black"
+      android:backgroundTint="@color/white"
       android:textSize="16sp"
       android:layout_below="@id/inputName"
       android:fontFamily="@font/coolvetica"/>
+
+  <Button
+      android:id="@+id/aBtn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/speechTV"
+      android:layout_toRightOf="@id/charAI"
+      android:layout_marginTop="44dp"
+      android:layout_marginLeft="52sp"
+      android:text="Ооба"
+      android:backgroundTint="@color/white"
+      android:textColor="@color/black"
+      android:visibility="visible"/>
+
+  <Button
+      android:id="@+id/bBtn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/speechTV"
+      android:layout_alignParentRight="true"
+      android:layout_marginRight="22dp"
+      android:layout_marginTop="44dp"
+      android:text="Жок"
+      android:backgroundTint="@color/white"
+      android:textColor="@color/black"
+      android:visibility="visible"/>
 </RelativeLayout>

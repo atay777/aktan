@@ -18,7 +18,10 @@ import android.widget.Toast;
 public class GameActvity extends AppCompatActivity {
 
     private EditText inputName;
+    private boolean areButtonsVisible = false;
+
     private Button submitButton;
+    private Button aBtn, bBtn;
     private String playerName = "";
     TextView speech;
     ImageView aktan;
@@ -76,9 +79,13 @@ public class GameActvity extends AppCompatActivity {
         speech = findViewById(R.id.speechTV);
         inputName = findViewById(R.id.inputName);
         submitButton = findViewById(R.id.submitButton);
+        aBtn = findViewById(R.id.aBtn);
+        bBtn = findViewById(R.id.bBtn);
         aktan = findViewById(R.id.charAI);
 
-        background = MediaPlayer.create(this, R.raw.spirit);
+        aBtn.setVisibility(View.GONE);
+        bBtn.setVisibility(View.GONE);
+
 
         View rootView = findViewById(android.R.id.content);
         rootView.setOnTouchListener(new View.OnTouchListener() {
@@ -97,7 +104,80 @@ public class GameActvity extends AppCompatActivity {
                         }
                     }
                 }
+                if (event.getAction() == MotionEvent.ACTION_DOWN && !areButtonsVisible) {
+                    if (textIndex < texts.length) {
+                        switch (textIndex) {
+                            case 0:
+                                aktan.setImageResource(R.drawable.aktan);
+                                aBtn.setVisibility(View.GONE);
+                                bBtn.setVisibility(View.GONE);
+                                areButtonsVisible = false;
+                                break;
+                            case 1:
+                                aktan.setImageResource(R.drawable.aktan);
+                                aBtn.setVisibility(View.GONE);
+                                bBtn.setVisibility(View.GONE);
+                                areButtonsVisible = false;
+                                break;
+                            case 2:
+                                aktan.setImageResource(R.drawable.aktan);
+                                aBtn.setVisibility(View.GONE);
+                                bBtn.setVisibility(View.GONE);
+                                areButtonsVisible = false;
+                                break;
+                            case 3:
+                                aktan.setImageResource(R.drawable.aktan);
+                                aBtn.setVisibility(View.VISIBLE);
+                                bBtn.setVisibility(View.VISIBLE);
+                                areButtonsVisible = true;
+                                goToNextCase();
+
+                                case 4:
+                                aktan.setImageResource(R.drawable.aktan);
+                                aBtn.setVisibility(View.GONE);
+                                bBtn.setVisibility(View.GONE);
+                                areButtonsVisible = false;
+                                break;
+                        }
+                    }
+                }
                 return true;
+            }
+        });
+        aBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aBtn.setVisibility(View.GONE);
+                bBtn.setVisibility(View.GONE);
+                goToNextCase();
+            }
+        });
+        bBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aBtn.setVisibility(View.GONE);
+                bBtn.setVisibility(View.GONE);
+                goToNextCase();
+            }
+        });
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playerName = inputName.getText().toString();
+                if (!playerName.isEmpty()) {
+                    inputName.setVisibility(View.GONE);
+                    submitButton.setVisibility(View.GONE);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            textIndex++;
+                            updateStory();
+                        }
+                    }, 0);
+                } else {
+                    Toast.makeText(GameActvity.this, "Сенин атың ким?", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -126,23 +206,48 @@ public class GameActvity extends AppCompatActivity {
         if (textIndex < texts.length) {
             speech.setText(texts[textIndex]);
             Log.d("PlayActivity", "Displaying text: " + texts[textIndex]);
+
             switch (textIndex) {
                 case 0:
                     aktan.setImageResource(R.drawable.aktan);
+                    aBtn.setVisibility(View.GONE);
+                    bBtn.setVisibility(View.GONE);
                     break;
                 case 1:
                     aktan.setImageResource(R.drawable.aktan);
+                    aBtn.setVisibility(View.GONE);
+                    bBtn.setVisibility(View.GONE);
                     break;
                 case 2:
                     aktan.setImageResource(R.drawable.aktan);
+                    aBtn.setVisibility(View.GONE);
+                    bBtn.setVisibility(View.GONE);
                     break;
                 case 3:
                     aktan.setImageResource(R.drawable.aktan);
+                    aBtn.setVisibility(View.VISIBLE);
+                    bBtn.setVisibility(View.VISIBLE);
+                    aBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            goToNextCase();
+                        }
+                    });
+                    bBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            goToNextCase();
+                        }
+                    });
                     break;
                 case 4:
                     aktan.setImageResource(R.drawable.aktan);
+                    aBtn.setVisibility(View.GONE);
+                    bBtn.setVisibility(View.GONE);
+                    break;
                 case 5:
                     aktan.setImageResource(R.drawable.aktan);
+                    break;
                 case 6:
                     aktan.setImageResource(R.drawable.aktan);
                     break;
@@ -163,6 +268,10 @@ public class GameActvity extends AppCompatActivity {
                 case 12:
                     aktan.setImageResource(R.drawable.akylai);
                     break;
+                case 13:
+                    aktan.setImageResource(R.drawable.akylai);
+                    break;
+
             }
 
             if (mediaPlayer != null) {
@@ -189,5 +298,35 @@ public class GameActvity extends AppCompatActivity {
         speech.setText(texts[textIndex]);
         inputName.setVisibility(View.VISIBLE);
         submitButton.setVisibility(View.VISIBLE);
+    }
+    private void goToNextCase() {
+        textIndex = 4;
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopAllMusic();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopAllMusic();
+    }
+
+    private void stopAllMusic() {
+        if (mediaPlayer != null) {
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+            }
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+        if (background != null) {
+            if (background.isPlaying()) {
+                background.stop();
+            }
+            background.release();
+            background = null;
+        }
     }
 }

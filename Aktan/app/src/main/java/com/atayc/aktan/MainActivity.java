@@ -20,11 +20,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Set the status bar color
         Window window = this.getWindow();
         window.setStatusBarColor(this.getResources().getColor(R.color.black));
 
-        playMusic(); // Start background music
+        playMusic();
 
         play = findViewById(R.id.play);
         hi = MediaPlayer.create(this, R.raw.kandai);
@@ -47,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        // Stop and release mediaPlayer when activity is no longer visible
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.release();

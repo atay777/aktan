@@ -130,9 +130,8 @@ public class GameActvity extends AppCompatActivity {
                                 aBtn.setVisibility(View.VISIBLE);
                                 bBtn.setVisibility(View.VISIBLE);
                                 areButtonsVisible = true;
-                                goToNextCase();
-
-                                case 4:
+                                break;
+                            case 4:
                                 aktan.setImageResource(R.drawable.aktan);
                                 aBtn.setVisibility(View.GONE);
                                 bBtn.setVisibility(View.GONE);
